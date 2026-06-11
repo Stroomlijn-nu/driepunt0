@@ -12,7 +12,7 @@ const obs = new IntersectionObserver((entries) => {
     const org = document.getElementById('org').value;
     const fase = document.getElementById('fase').value;
     const vraag = document.getElementById('vraag').value;
-    const subject = encodeURIComponent(`Kennismaking Driepunt0 – ${naam}`);
+    const subject = encodeURIComponent(`Kennismaking Driepunt0 — ${naam}`);
     const body = encodeURIComponent(`Naam: ${naam}\nOrganisatie: ${org}\nE-mail: ${email}\nFase: ${fase}\n\nVraagstuk:\n${vraag}`);
-    window.location.href=`mailto:info@tjimka.nl?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@tjimka.nl?subject=${subject}&body=${body}`;
   }
