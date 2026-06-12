@@ -58,23 +58,38 @@
     }
 
     .logo-badge {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      width: 52px;
+      height: 52px;
       background: var(--surface-2);
-      border: 2px solid var(--border-hi);
+      border-radius: 6px;
+      border: 1.5px solid rgba(196,151,58,0.55);
+      box-shadow:
+        0 0 0 1px rgba(196,151,58,0.10),
+        0 0 18px rgba(196,151,58,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .logo-badge span {
+    .logo-badge svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-badge-text {
       font-family: var(--font-d);
       font-size: 0.92rem;
       font-weight: 800;
       color: var(--accent);
       letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
 
     .logo-text {
@@ -137,13 +152,15 @@
     /* HERO */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       align-items: center;
       padding: 8rem 5vw 5rem;
-      gap: 5rem;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-left {
+      max-width: 680px;
     }
 
     .hero::after {
@@ -204,7 +221,7 @@
     .hero-sub {
       font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 46ch;
+      max-width: 52ch;
       margin-bottom: 2.5rem;
       line-height: 1.75;
     }
@@ -256,50 +273,23 @@
       letter-spacing: 0.02em;
     }
 
-    /* HERO RIGHT - portrait + release cards */
-    .hero-right {
+    /* RELEASE CAYDS at hero */
+    .hero-releases {
       display: flex;
-      flex-direction: column;
       gap: 1.25rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Tjimka portrait in hero */
-    .hero-portrait {
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border-hi);
-      position: relative;
-    }
-
-    .hero-portrait img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      object-position: center 25%;
-      display: block;
-    }
-
-    .hero-portrait-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 0.75rem 1rem;
-      background: linear-gradient(0deg, rgba(12,14,20,0.9) 0%, transparent 100%);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
     }
 
     .release-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 1.5rem 1.75rem;
+      padding: 1.25rem 1.5rem;
       position: relative;
       overflow: hidden;
+      flex: 1;
+      min-width: 200px;
     }
 
     .release-card::before {
@@ -571,14 +561,52 @@
 
     .team-card:hover { border-color: rgba(196,151,58,0.35); }
 
-    /* Team photo */
-    .team-photo {
+    .team-photo-wrap {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: center 15%;
-      display: block;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
       border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+      position: relative;
+    }
+
+    .team-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover .team-photo-wrap img {
+      transform: scale(1.03);
+    }
+
+    .team-photo-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(20,24,32,0.55));
+      pointer-events: none;
+    }
+
+    .team-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-photo-initials {
+      font-family: var(--font-d);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      opacity: 0.35;
     }
 
     .team-card-top {
@@ -667,7 +695,7 @@
     }
 
     .testimonial-quote::before {
-      content: '"';
+      content: '\201C';
       font-family: var(--font-d);
       font-size: 2rem;
       color: var(--accent);
@@ -829,8 +857,8 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding-top: 7rem; }
-      .hero-right { display: none; }
+      .hero { padding-top: 7rem; }
+      .hero-releases { flex-direction: column; }
       .fases-grid { grid-template-columns: 1fr; }
       .fase { border-right: none; border-bottom: 1px solid var(--border); }
       .fase:last-child { border-bottom: none; }
